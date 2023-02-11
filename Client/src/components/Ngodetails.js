@@ -57,6 +57,7 @@ const NgoDetails = () => {
 
         //server in return of accepting or rejecting data send a response 
         const data = await res.json();
+        console.log(data);
 
         if (data.status === 422 || !data) {
             window.alert("not sent")
@@ -67,7 +68,7 @@ const NgoDetails = () => {
             window.alert("Details added Successfull");
             console.log("Details added Successfull");
 
-            history.push("/home");
+            history.push("/login/ngo");
         }
     }
 
@@ -82,13 +83,13 @@ const NgoDetails = () => {
                     <div class="form-group col-md-6">
                         <label for="ngo">type of ngo</label>
                         <input type="text" name="typeofngo" class="form-control"
-                            value={details.typeOfNgo}
+                            value={details.typeofngo}
                             onChange={handleInputs} id="ngo" placeholder="type of ngo" />
                     </div>
                     <div class="form-group col-md-6">
                         <label for="pwork">Previous work</label>
                         <input type="text" name="previouswork" class="form-control"
-                            value={details.previousWork}
+                            value={details.previouswork}
                             onChange={handleInputs}
                             id="pwork" placeholder="Previous work" />
                     </div>
@@ -103,7 +104,7 @@ const NgoDetails = () => {
                 <div class="form-group">
                     <label for="inputAddress2">End Goal</label>
                     <input type="text" name="endgoal" class="form-control"
-                        value={details.endGoal}
+                        value={details.endgoal}
                         onChange={handleInputs}
                         id="inputAddress2" placeholder="End Goal" />
                 </div>
@@ -120,7 +121,7 @@ const NgoDetails = () => {
                     <div class="form-group col-md-6">
                         <label for="plans">Image URL</label>
                         <input type="text" name="imageUrl" class="form-control"
-                            value={details.imageURL}
+                            value={details.imageUrl}
                             onChange={handleInputs}
                             id="plans" />
                     </div>

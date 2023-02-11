@@ -3,9 +3,20 @@ const mongoose = require('mongoose');
 const router = express.Router();
 const PUSER = require('../models/philanthropicSchema');
 const NGO = require('../models/ngoSchema');
+const MESSAGE = require('../models/messageSchema');
 const bcrypt = require('bcryptjs');
 // const authenticate = require('../middleware/authentication');
 
+// to get the all ngos through this api
+router.get('/allngosdata', async (req, res) => {
+    try {
+        const allngos = await NGO.find();
+        res.status(201).json(allngos);
+    } catch (error) {
+        res.send(400).json(allngos);
+        console.log(error);
+    }
+});
 
 // Register the Philanthropic
 
@@ -115,7 +126,7 @@ router.post('/philanthropic/login', async (req, res) => {
                     path: '/',
                     domain: 'localhost'
                 });
-                res.status(200).json({ message: "password match" })
+                res.status(200).json(PUSERlogin)
             }
         } else {
             res.status(400).json({ error: 'invalid details' });
@@ -137,7 +148,7 @@ router.post('/ngo/login', async (req, res) => {
 
     try {
         const ngologin = await NGO.findOne({ email: email });
-        console.log("data of philantropic" + ngologin);
+        console.log("data of ngo" + ngologin);
 
         if (ngologin) {
             const isMatch = await bcrypt.compare(password, ngologin.password);
@@ -158,7 +169,7 @@ router.post('/ngo/login', async (req, res) => {
                     path: '/',
                     domain: 'localhost'
                 });
-                res.status(200).json({ message: "password match" })
+                res.status(200).json(ngologin);
             }
         } else {
             res.status(400).json({ error: 'invalid details' });
@@ -172,44 +183,89 @@ router.post('/ngo/login', async (req, res) => {
 // API For getting the details of ngo 
 
 router.post('/ngoworkdetails/:id', async (req, res) => {
-    
-        // getting the plans of ngo 
-        const {location,previouswork,endgoal,plans,typeofngo} = req.body;
-        console.log({location,previouswork,endgoal,plans,typeofngo});
-   
+
+    // getting the plans of ngo 
+    const ngoData = req.body;
+
+    if (!ngoData.location || !ngoData.previouswork || !ngoData.endgoal || !ngoData.plans || !ngoData.typeofngo || !ngoData.imageUrl) {
+        res.status(422).json({ error: "fill the all data" });
+        console.log('Not data available');
+    }
+
+
     try {
-        let {id} = req.params;
+        let { id } = req.params;
         console.log(id);
+        console.log(ngoData);
 
         id = new mongoose.Types.ObjectId(id);
         console.log(id);
 
+        // adding in the perticular ngo schema this details
+        const ngoUser = await NGO.findOne({ _id: id });
+        console.log("USER FOUND " + ngoUser);
 
+        if (ngoUser) {
+            const addData = await ngoUser.addngoinfo(ngoData);
+            await ngoUser.save();
+            console.log("Data of ngo current work and location " + addData);
+            res.status(201).json(addData);
 
-        if (!location || !previouswork || !endgoal || !plans || !typeofngo) {
-            res.status(400).json({ error: "fill the all data" })
-            console.log('Not data available');
-          };
-
-          // adding in the perticular ngo schema this details
-          const ngoUser = await NGO.findOne({_id: id});
-          console.log("USER FOUND " + ngoUser);
-          if(ngoUser){
-              const addData = await ngoUser.addngoinfo({location,previouswork,endgoal,plans,typeofngo});
-              await ngoUser.save();
-              console.log(ngoUser);
-              console.log("Data of ngo current work and location " + addData);
-              res.status(200).json(addData);
-                      
-        }else{
-            res.status(400).json({error: "Invalid user"});
+        } else {
+            res.status(422).json({ error: "Invalid user" });
         }
 
-        
+
     } catch (error) {
         console.log("Error occured in the ngoworkdetails/:id " + error);
     }
+});
+
+
+// to fetch the perticular NGo page
+
+router.get('/getsinglengoinfo/:id',async(req,res)=>{
+    try{
+        let {id} = req.params;
+
+        id = new mongoose.Types.ObjectId(id);
+        console.log(id);
+
+        const individualdata = await NGO.findOne({_id: id});
+        res.status(201).json(individualdata);
+    } catch (error) {
+        res.status(404).json(individualdata);
+        console.log("Error occur individual fetching time " + error.message);
+    }
 })
+
+
+// Store the text message 
+
+router.post('/insertmessage',async(req,res)=>{
+    const newMessage = new MESSAGE(req.body);
+
+    try {
+        const savedMessage = await newMessage.save();
+        res.status(201).json(savedMessage);
+    } catch (error) {
+        res.status(404).json(error.message);
+    }
+})
+
+
+// Fetching the all messages 
+
+router.get('/getallmessages',async(req,res)=>{
+     try {
+        const messages = await MESSAGE.find();
+        res.status(201).json(messages);
+     } catch (error) {
+        res.status(404).json(error.message);
+     }
+})
+
+
 
 
 

@@ -10,9 +10,12 @@ import Home from './components/Home';
 import Image from './components/Image';
 import About from './components/About';
 import Contact from './components/Contact';
-import Login from './components/Login';
+import Login from './components/Loginplentro';
+import Loginngo from './components/Loginngo'
 import Signup1 from './components/Signup1';
 import Signup2 from './components/Signup2';
+import Dashboard from './components/Dashboard';
+import Messenger from './components/messanger/Messenger';
 
 //making router files
 import {
@@ -22,6 +25,7 @@ import {
   Link
 } from "react-router-dom";
 import NgoDetails from './components/Ngodetails';
+import Details from './components/Details';
 
 function App() {
   return (
@@ -45,22 +49,40 @@ function App() {
         <NgoDetails />
       </Route>
 
+      <Route path="/details/:id">
+        <Details />
+      </Route>
 
       <Route path="/contact">
         <Contact />
       </Route>
 
-      <Route path="/login">
+      <Route path="/login/plentropist">
         <Login />
+      </Route>
+
+      <Route path="/login/ngo">
+        <Loginngo />
       </Route>
 
       <Route path="/register1">
         <Signup1 />
       </Route>
 
+      <Route path="/deshboard/:id">
+        <Dashboard />
+      </Route>
+
+      
+
       <Route path="/register2">
         <Signup2 />
       </Route>
+
+      <Route path="/messenger/:id">
+        <Messenger />
+      </Route>
+      
 
   
       {/* <Nav />

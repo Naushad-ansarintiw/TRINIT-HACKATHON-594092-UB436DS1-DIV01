@@ -1,5 +1,8 @@
 import React, { useState } from 'react'
 import { NavLink, useHistory } from 'react-router-dom'
+// import  "https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/css/bootstrap.min.css"
+
+
 
 const Signup = () => {
 
@@ -10,7 +13,7 @@ const Signup = () => {
   let user,setUser;
 
   // creating hooks
-  [user, setUser] = useState({ name: "", lname: "", email: "", password: "", cpassword: "" });
+  [user, setUser] = useState({ name: "", email: "", password: "", cpassword: "" });
 
   let name, value;
 
@@ -64,7 +67,7 @@ const postData= async(e) =>{
     window.alert("Registeration Successfull");
     console.log("Registeration Successfull");
 
-    history.push("/login");
+    history.push("/login/plentropist");
   }
 
 }
@@ -111,7 +114,7 @@ const postData= async(e) =>{
               <label for="floatingPassword">ConfirmPassword</label>
             </div>
 
-            <NavLink to="/login">Already Registered</NavLink>
+            <NavLink to="/login/plentropist">Already Registered</NavLink>
             <input className="w-100 btn btn-lg btn-primary" type="submit" value="register" onClick={postData}/>
             <p className="mt-5 mb-3 text-muted">&copy; 2022-2023 </p>
           </form> 

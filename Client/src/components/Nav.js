@@ -6,7 +6,6 @@ import {NavLink} from 'react-router-dom'
 
 // import 'bootstrap/dist/css/bootstrap.css'
 
-import logo from '../images/owaislogo.jpg'
 
 const Nav = () => {
   return (

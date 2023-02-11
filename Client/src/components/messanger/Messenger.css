@@ -1,0 +1,35 @@
+.messanger{
+    height: calc(100vh - 20px);
+    display: flex;
+}
+
+.chatBoxWrapper{
+    padding: 10px;
+    position : relative;
+}
+
+
+.chatBoxBotton{
+    margin-top: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.chatMessageInput{
+    width: 78%;
+    height: 90px;
+    padding: 20px;
+}
+
+.chatSubmitButton{
+    width: 70px;
+    height: 40px;
+    margin: 29px;
+    border: none;
+    padding: 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    background-color: #c4f9c3;
+    color: black;
+}

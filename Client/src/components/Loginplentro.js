@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import { NavLink, useHistory } from 'react-router-dom'
+// import "https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/css/bootstrap.min.css"
 
 
 const Login = () => {
@@ -11,15 +12,16 @@ const Login = () => {
 
   const loginUser = async (e) => {
     e.preventDefault();
+    loginplentropistdata();
+  }
 
-    setEmail()
-
+  const loginplentropistdata = async () => {
 
     const res = await fetch('http://localhost:5000/api/philanthropic/login', {
       method: "POST",
       credentials: 'include',
-      headers:{
-        "Content-Type":"application/json"
+      headers: {
+        "Content-Type": "application/json"
       },
 
       body: JSON.stringify({
@@ -27,30 +29,16 @@ const Login = () => {
       })
     });
 
-    const data = res.json();
+    const data = await res.json();
 
     if (data.status === 400 || !data) {
       window.alert("Invalid Credentials")
     }
     else {
-      //       var headers = new Headers();
-      // headers.append('Content-Type', 'application/json');
-      // headers.append('Accept', 'application/json');
 
-      // return fetch('/signin', {
-      //     method: 'POST',
-      //     mode: 'same-origin',
-      //     redirect: 'follow',
-      //     credentials: 'include', // Don't forget to specify this if you need cookies
-      //     headers: headers,
-      //     body: JSON.stringify({
-      //         first_name: 'John',
-      //         last_name: 'Doe'
-      //     })
-      // })
-
+      // console.log(data);
       window.alert("Login Successful");
-      history.push('/home')
+      history.push(`/deshboard/${data._id}`);
     }
   }
 
@@ -59,7 +47,7 @@ const Login = () => {
       <form id="form">
 
 
-        <h1 className="h3 mb-3 fw-normal">Signup to Classroom</h1>
+        <h1 className="h3 mb-3 fw-normal">Signup to Account</h1>
 
         <div className="form-floating">
           <input type="type" name="email" className="form-control top" placeholder="username"

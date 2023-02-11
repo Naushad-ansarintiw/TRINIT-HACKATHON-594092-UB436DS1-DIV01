@@ -35,25 +35,8 @@ const ngoSchema = new mongoose.Schema({
             }
         }
     ],
-    location: {
-        type: String,
-    },
-    previouswork: {
-        type: String,
-    },
-    endgoal: {
-        type: String,
-    },
-    plans: {
-        type: String,
-    },
-    typeofngo: {
-        type: String,
-    },
-    imageUrl: {
-        type: String,
-        
-    }
+
+    anotherdata: Array
 
 });
 
@@ -97,15 +80,11 @@ ngoSchema.methods.generateAuthToken = async function() {
 //     }
 // }
 
-ngoSchema.methods.addngoinfo = async function({location,previouswork,endgoal,plans,typeofngo}){
+ngoSchema.methods.addngoinfo = async function(ngoData){
     try {
-        this.location = this.location.concat(location);
-        this.previouswork = this.location.concat(previouswork);
-        this.endgoal = this.location.concat(endgoal);
-        this.plans = this.location.concat(plans);
-        this.typeofngo = this.location.concat(typeofngo);
+        this.anotherdata = this.anotherdata.concat(ngoData);
         await this.save();
-        return this
+        return this.anotherdata;
     } catch (error) {
         res.status(401).json({ error: 'Invalid details' });
     }

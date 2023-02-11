@@ -112,7 +112,7 @@ const Signup = () => {
               <label for="floatingPassword">ConfirmPassword</label>
             </div>
 
-            <NavLink to="/login">Already Registered</NavLink>
+            <NavLink to="/login/ngo">Already Registered</NavLink>
             <button className="w-100 btn btn-lg btn-primary" type="submit" value="register" >Register</button>
             <p className="mt-5 mb-3 text-muted">&copy; 2022-2023 </p>
           </form>
