@@ -26,6 +26,7 @@ import {
 } from "react-router-dom";
 import NgoDetails from './components/Ngodetails';
 import Details from './components/Details';
+import StripeContainer from './components/StripeContainer';
 
 function App() {
   return (
@@ -81,6 +82,10 @@ function App() {
 
       <Route path="/messenger/:id">
         <Messenger />
+      </Route>
+
+      <Route path="/payment">
+        <StripeContainer />
       </Route>
       
 

@@ -50,6 +50,7 @@ const Container = styled.div`
   flex-direction: column;
   background-color: #fff;
   z-index: 10;
+  margin-top:260px;
 `;
 const Image = styled.div`
   width: 100%;

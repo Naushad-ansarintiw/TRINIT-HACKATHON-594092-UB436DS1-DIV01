@@ -1,4 +1,6 @@
-import React from 'react'
+import React, { useContext } from 'react'
+import noteContext from './context/noteContext';
+
 // import 'boostrap/dist/css/bootstrap.css';
 
 //to make page unrefreshable on opening each liknk
@@ -8,6 +10,11 @@ import {NavLink} from 'react-router-dom'
 
 
 const Nav = () => {
+
+    // Using Context api
+    const context = useContext(noteContext);
+    // const { products,getNotes } = context; // used to set the cart number dynamically
+
   return (
     <nav className="navbar navbar-expand-lg navbar-light bg-light">
     <NavLink className="navbar-brand" to="#">

@@ -1,5 +1,11 @@
 import React, { useState, useEffect } from 'react'
 import { useParams } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
+import WhatsAppIcon from '@mui/icons-material/WhatsApp';
+import CurrencyRupeeIcon from '@mui/icons-material/CurrencyRupee';
+import styled from "styled-components";
+import './details.css';
+
 // import {useState} from "react"
 
 const Details = () => {
@@ -52,9 +58,42 @@ const Details = () => {
                     </div>
                 </div>
             }
+            <Parent>
+                <Child>
+                    <NavLink className='child' to={`/messenger/${id}`}><Image><WhatsAppIcon className='image' /></Image></NavLink>
+                </Child>
+                <Child1>
+                    <NavLink className='child1' to={`/payment`}><Image><CurrencyRupeeIcon className='image' /></Image></NavLink>
+                </Child1>
+            </Parent>
 
         </>
     )
 }
+const Parent = styled.div`
+    position: relative;
+`;
+const Child = styled.div`
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    height: 45px;
+    width: 45px;
+    margin-right: 80px;
+    margin-bottom: 40px;
+`;
+const Child1 = styled.div`
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    height: 45px;
+    width: 45px;
+    margin-right: 190px;
+    margin-bottom: 32px;
+`;
+const Image = styled.div`
+    height: 90px;
+    width: 90px;
+`;
 
 export default Details

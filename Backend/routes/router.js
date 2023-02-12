@@ -1,3 +1,4 @@
+require('dotenv').config();
 const express = require('express');
 const mongoose = require('mongoose');
 const router = express.Router();
@@ -6,6 +7,7 @@ const NGO = require('../models/ngoSchema');
 const MESSAGE = require('../models/messageSchema');
 const bcrypt = require('bcryptjs');
 // const authenticate = require('../middleware/authentication');
+const stripe = require('stripe')(process.env.STRIPESECRETKEY)
 
 // to get the all ngos through this api
 router.get('/allngosdata', async (req, res) => {
@@ -264,6 +266,22 @@ router.get('/getallmessages',async(req,res)=>{
         res.status(404).json(error.message);
      }
 })
+
+
+// CREATE PAYMENT
+router.post("/payment/create", async (req, res) => {
+    const total = req.body.amount;
+    console.log("Payment Request recieved for this ruppess", total);
+  
+    const payment = await stripe.paymentIntents.create({
+      amount: total * 100,
+      currency: "inr",
+    });
+  
+    res.status(201).send({
+      clientSecret: payment.client_secret,
+    });
+  });
 
 
 

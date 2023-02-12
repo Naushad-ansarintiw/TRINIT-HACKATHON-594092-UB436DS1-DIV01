@@ -1,0 +1,32 @@
+.whatsappimage{
+    position: relative;
+}
+
+.payment{
+    position: relative;
+}
+
+.child{
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    height: 45px;
+    width: 45px;
+    margin-right: 80px;
+    margin-bottom: 40px;
+}
+
+.child1{
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    height: 45px;
+    width: 45px;
+    margin-right: 190px;
+    margin-bottom: 32px;
+}
+
+.image{
+    height: 90px;
+    width: 90px;
+}
